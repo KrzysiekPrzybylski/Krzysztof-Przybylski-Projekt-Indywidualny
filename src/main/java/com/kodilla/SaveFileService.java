@@ -1,13 +1,16 @@
 package com.kodilla;
 
+import javafx.scene.control.Button;
+
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
 public class SaveGame implements Serializable {
 
-    File savedHashMaps = new File("save");
+    File savedHashMaps = new File("src/resources/save");
     Map<String, Long> map = new HashMap<>();
+
 
     public void saveMap() {
         try {
