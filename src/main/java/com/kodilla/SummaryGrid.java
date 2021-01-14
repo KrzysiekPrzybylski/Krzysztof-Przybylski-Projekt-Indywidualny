@@ -2,14 +2,18 @@ package com.kodilla;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+
+import java.io.File;
 
 import static com.kodilla.StartMenu.*;
 import static com.kodilla.TicTacToe.*;
 
 public class SummaryGrid {
+
 
 
     public static GridPane getSummaryGrid() {
@@ -20,7 +24,7 @@ public class SummaryGrid {
         grid.setHgap(5);
         grid.setVgap(10);
 
-        Text round = new Text("Round "+gameStatus.getRoundNumber()+"/3");
+        Text round = new Text("Round "+gameStatus.getRoundNumber()+"/5");
         round.setFont(Font.font("Geneva", 22));
         Text score = new Text("Score");
         Text player = new Text();
@@ -33,10 +37,26 @@ public class SummaryGrid {
             player.setText(textFieldName.getText() + ": " + gameStatus.getPlayerScore());
         }
 
+
         grid.add(round, 1,1);
         grid.add(score, 1,2);
         grid.add(player,1,3);
         grid.add(computer, 1, 4);
+
+        Button saveButton = new Button("Save");
+        Button loadButton = new Button("Load");
+
+        saveButton.setOnMouseClicked(event -> {
+            SaveFileService.save(gameStatus.getRoundNumber(), gameStatus.getPlayerScore(), gameStatus.getComputerScore());
+        });
+        loadButton.setOnMouseClicked(event -> {
+            SaveFileService.load(new File("save.txt"));
+        });
+
+        grid.add(saveButton,2,1);
+        grid.add(loadButton,3,1);
+
+
 
 
 

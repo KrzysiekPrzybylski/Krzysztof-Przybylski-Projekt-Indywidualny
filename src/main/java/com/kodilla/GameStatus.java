@@ -2,8 +2,15 @@ package com.kodilla;
 
 public class GameStatus {
 
-//    public GameStatus() {
-//    }
+    public GameStatus() {
+    }
+
+
+    public GameStatus(int roundNumber, int playerScore, int computerScore) {
+        this.roundNumber = roundNumber;
+        this.playerScore = playerScore;
+        this.computerScore = computerScore;
+    }
 
     private int roundNumber;
     private int playerScore;
@@ -35,7 +42,7 @@ public class GameStatus {
     }
 
     public boolean isThereFinalWin(){
-        return getPlayerScore()==3 || getComputerScore()==3;
+        return getPlayerScore()==5 || getComputerScore()==5;
     }
 
     public void increseRoundNumber(){

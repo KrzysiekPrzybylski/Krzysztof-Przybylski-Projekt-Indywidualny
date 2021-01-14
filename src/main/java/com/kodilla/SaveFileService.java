@@ -1,30 +1,33 @@
 package com.kodilla;
 
-import javafx.scene.control.Button;
-
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SaveGame implements Serializable {
+public class SaveFileService implements Serializable {
 
-    File savedHashMaps = new File("src/resources/save");
-    Map<String, Long> map = new HashMap<>();
+    private static final File file = new File("save.txt");
+    private static final Map<String, Integer> map = new HashMap<>();
 
 
-    public void saveMap() {
+    public static void save(int roundNumber, int playerPoints, int computerPoints) {
+        map.put("round number",roundNumber);
+        map.put("player points",playerPoints);
+        map.put("computer points",computerPoints);
+        GameStatus gameStatus = new GameStatus(roundNumber, playerPoints, computerPoints);
+
         try {
-            ObjectOutputStream oos = new ObjectOutputStream (new FileOutputStream(savedHashMaps));
-            oos.writeObject(map);
+            ObjectOutputStream oos = new ObjectOutputStream (new FileOutputStream(file));
+            oos.writeObject(gameStatus);
             oos.close();
         } catch (Exception e) {
             // obsługa błędów
         }
     }
 
-    public void loadMap() {
+    public static void load(File file) {
         try {
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(savedHashMaps));
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
             Object readMap = ois.readObject();
             if(readMap instanceof HashMap) {
                 map.putAll((HashMap) readMap);
