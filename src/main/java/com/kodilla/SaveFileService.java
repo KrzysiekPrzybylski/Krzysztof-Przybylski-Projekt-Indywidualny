@@ -25,16 +25,16 @@ public class SaveFileService implements Serializable {
         }
     }
 
-    public static void load(File file) {
+    public static GameStatus load(File file) {
+        GameStatus gameStatus = null;
         try {
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
-            Object readMap = ois.readObject();
-            if(readMap instanceof HashMap) {
-                map.putAll((HashMap) readMap);
-            }
+            gameStatus = (GameStatus)ois.readObject();
+            System.out.println(gameStatus);
             ois.close();
         } catch (Exception e) {
-            // obsługa błędów
+            e.printStackTrace();
         }
+        return gameStatus;
     }
 }

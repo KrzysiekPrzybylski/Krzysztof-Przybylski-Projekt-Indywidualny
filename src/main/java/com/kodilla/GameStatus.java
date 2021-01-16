@@ -1,6 +1,8 @@
 package com.kodilla;
 
-public class GameStatus {
+import java.io.Serializable;
+
+public class GameStatus implements Serializable {
 
     public GameStatus() {
     }
@@ -63,6 +65,12 @@ public class GameStatus {
         computerScore=0;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "GameStatus{" +
+                "roundNumber=" + roundNumber +
+                ", playerScore=" + playerScore +
+                ", computerScore=" + computerScore +
+                '}';
+    }
 }

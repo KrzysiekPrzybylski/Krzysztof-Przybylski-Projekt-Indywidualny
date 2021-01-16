@@ -15,6 +15,11 @@ import static com.kodilla.TicTacToe.*;
 public class SummaryGrid {
 
 
+    private static Text round;
+    private static Text player;
+    private static Text computer;
+
+
 
     public static GridPane getSummaryGrid() {
 
@@ -24,7 +29,7 @@ public class SummaryGrid {
         grid.setHgap(5);
         grid.setVgap(10);
 
-        Text round = new Text("Round "+gameStatus.getRoundNumber()+"/5");
+        round = new Text("Round "+gameStatus.getRoundNumber()+"/5");
         round.setFont(Font.font("Geneva", 22));
         Text score = new Text("Score");
         Text player = new Text();
@@ -50,7 +55,14 @@ public class SummaryGrid {
             SaveFileService.save(gameStatus.getRoundNumber(), gameStatus.getPlayerScore(), gameStatus.getComputerScore());
         });
         loadButton.setOnMouseClicked(event -> {
-            SaveFileService.load(new File("save.txt"));
+            GameStatus gameStatusSaved = SaveFileService.load(new File("save.txt"));
+            gameStatus.setRoundNumber(gameStatusSaved.getRoundNumber());
+            gameStatus.setComputerScore(gameStatusSaved.getComputerScore());
+            gameStatus.setPlayerScore(gameStatusSaved.getPlayerScore());
+            player.setText("You: " + gameStatus.getPlayerScore());
+            computer.setText("Computer: " + gameStatus.getComputerScore());
+            round.setText("Round "+gameStatus.getRoundNumber()+"/5");
+
         });
 
         grid.add(saveButton,2,1);
@@ -62,4 +74,6 @@ public class SummaryGrid {
 
         return grid;
     }
+
+
 }
