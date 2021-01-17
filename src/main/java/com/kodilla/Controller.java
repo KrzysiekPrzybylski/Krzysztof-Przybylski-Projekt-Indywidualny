@@ -27,12 +27,12 @@ import static javafx.application.Platform.exit;
 
 import javafx.stage.Stage;
 
-public class Controller implements EnterSymbol{
+public class Controller implements EnterSymbol {
 
-    public static void whoFirst(){
+    public static void whoFirst() {
         Random random = new Random();
         int lot = random.nextInt(2);
-        if(lot%2==0){
+        if (lot % 2 == 0) {
             EnterSymbol.drawComputerSymbol(symbolsGroup.getSelectedToggle());
         }
     }
@@ -40,23 +40,25 @@ public class Controller implements EnterSymbol{
     public static void roundWinner(int h) {
 
         Text message = new Text();
+        try {
 
-        if (h == Symbol.CROSS.number && symbolsGroup.getSelectedToggle().equals(crossRadio)) {
-            message.setText("Congratulation! You won the round.");
-            gameStatus.pointForPlayer();
-        }
-        else if (h == Symbol.CIRCLE.number && symbolsGroup.getSelectedToggle().equals(circleRadio)) {
-            message.setText("Congratulation! You won the round.");
-            gameStatus.pointForPlayer();
-        }
-        else{
-            message.setText("Sorry, you lost the round.");
-            gameStatus.pointForComputer();
+            if (h == Symbol.CROSS.number && symbolsGroup.getSelectedToggle().equals(crossRadio)) {
+                message.setText("Congratulation! You won the round.");
+                gameStatus.pointForPlayer();
+            } else if (h == Symbol.CIRCLE.number && symbolsGroup.getSelectedToggle().equals(circleRadio)) {
+                message.setText("Congratulation! You won the round.");
+                gameStatus.pointForPlayer();
+            } else {
+                message.setText("Sorry, you lost the round.");
+                gameStatus.pointForComputer();
+            }
+        } catch (Exception a) {
+            message.setText("Draw");
         }
 
-        gameStatus.increseRoundNumber();
+        gameStatus.increaseRoundNumber();
 
-        if(!checkFinalWin()) {
+        if (!checkFinalWin()) {
 
             message.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
             Button buttonNextRound = new Button("Next round");
@@ -82,64 +84,61 @@ public class Controller implements EnterSymbol{
     }
 
 
-    public static boolean checkRoundWin(){
+    public static boolean checkRoundWin() {
         boolean check = false;
+
         //PION
-        if (stackPaneHashMap.get(stackPane1)==stackPaneHashMap.get(stackPane4) &&
-                stackPaneHashMap.get(stackPane4)==(stackPaneHashMap.get(stackPane7)) && stackPaneHashMap.get(stackPane1)!=0){
+        if (stackPaneHashMap.get(stackPane1) == stackPaneHashMap.get(stackPane4) &&
+                stackPaneHashMap.get(stackPane4) == (stackPaneHashMap.get(stackPane7)) && stackPaneHashMap.get(stackPane1) != 0) {
             roundWinner(stackPaneHashMap.get(stackPane1));
-            check=true;
-        }
-        else if((stackPaneHashMap.get(stackPane2)==(stackPaneHashMap.get(stackPane5)) &&
-                stackPaneHashMap.get(stackPane5)==(stackPaneHashMap.get(stackPane8))) && stackPaneHashMap.get(stackPane8)!=0){
+            check = true;
+        } else if ((stackPaneHashMap.get(stackPane2) == (stackPaneHashMap.get(stackPane5)) &&
+                stackPaneHashMap.get(stackPane5) == (stackPaneHashMap.get(stackPane8))) && stackPaneHashMap.get(stackPane8) != 0) {
             roundWinner(stackPaneHashMap.get(stackPane8));
-            check=true;
-        }
-        else if((stackPaneHashMap.get(stackPane3)==(stackPaneHashMap.get(stackPane6)) &&
-                stackPaneHashMap.get(stackPane9)==(stackPaneHashMap.get(stackPane6))) && stackPaneHashMap.get(stackPane6)!=0){
+            check = true;
+        } else if ((stackPaneHashMap.get(stackPane3) == (stackPaneHashMap.get(stackPane6)) &&
+                stackPaneHashMap.get(stackPane9) == (stackPaneHashMap.get(stackPane6))) && stackPaneHashMap.get(stackPane6) != 0) {
             roundWinner(stackPaneHashMap.get(stackPane6));
-            check=true;
+            check = true;
         }
         //POZIOM
-        else if((stackPaneHashMap.get(stackPane1)==(stackPaneHashMap.get(stackPane2)) &&
-                stackPaneHashMap.get(stackPane2)==(stackPaneHashMap.get(stackPane3))) && stackPaneHashMap.get(stackPane3)!=0){
+        else if ((stackPaneHashMap.get(stackPane1) == (stackPaneHashMap.get(stackPane2)) &&
+                stackPaneHashMap.get(stackPane2) == (stackPaneHashMap.get(stackPane3))) && stackPaneHashMap.get(stackPane3) != 0) {
             roundWinner(stackPaneHashMap.get(stackPane3));
-            check=true;
-        }
-        else if((stackPaneHashMap.get(stackPane4)==(stackPaneHashMap.get(stackPane5)) &&
-                stackPaneHashMap.get(stackPane5)==(stackPaneHashMap.get(stackPane6)))&& stackPaneHashMap.get(stackPane6)!=0){
+            check = true;
+        } else if ((stackPaneHashMap.get(stackPane4) == (stackPaneHashMap.get(stackPane5)) &&
+                stackPaneHashMap.get(stackPane5) == (stackPaneHashMap.get(stackPane6))) && stackPaneHashMap.get(stackPane6) != 0) {
             roundWinner(stackPaneHashMap.get(stackPane6));
-            check=true;
-        }
-        else if((stackPaneHashMap.get(stackPane7)==(stackPaneHashMap.get(stackPane8)) &&
-                stackPaneHashMap.get(stackPane8)==(stackPaneHashMap.get(stackPane9))) && stackPaneHashMap.get(stackPane9)!=0){
+            check = true;
+        } else if ((stackPaneHashMap.get(stackPane7) == (stackPaneHashMap.get(stackPane8)) &&
+                stackPaneHashMap.get(stackPane8) == (stackPaneHashMap.get(stackPane9))) && stackPaneHashMap.get(stackPane9) != 0) {
             roundWinner(stackPaneHashMap.get(stackPane9));
-            check=true;
+            check = true;
         }
         //SKOS
-        else if((stackPaneHashMap.get(stackPane1)==(stackPaneHashMap.get(stackPane9)) &&
-                stackPaneHashMap.get(stackPane9)==(stackPaneHashMap.get(stackPane5)))&& stackPaneHashMap.get(stackPane5)!=0){
+        else if ((stackPaneHashMap.get(stackPane1) == (stackPaneHashMap.get(stackPane9)) &&
+                stackPaneHashMap.get(stackPane9) == (stackPaneHashMap.get(stackPane5))) && stackPaneHashMap.get(stackPane5) != 0) {
             roundWinner(stackPaneHashMap.get(stackPane5));
-            check=true;
-        }
-        else if((stackPaneHashMap.get(stackPane3)==(stackPaneHashMap.get(stackPane5)) &&
-                stackPaneHashMap.get(stackPane5)==(stackPaneHashMap.get(stackPane7)))&& stackPaneHashMap.get(stackPane7)!=0){
+            check = true;
+        } else if ((stackPaneHashMap.get(stackPane3) == (stackPaneHashMap.get(stackPane5)) &&
+                stackPaneHashMap.get(stackPane5) == (stackPaneHashMap.get(stackPane7))) && stackPaneHashMap.get(stackPane7) != 0) {
             roundWinner(stackPaneHashMap.get(stackPane7));
-            check=true;
+            check = true;
         }
+
         return check;
     }
 
 
     public static StackPane convertion(Object o) {
-        if(o instanceof StackPane) {
+        if (o instanceof StackPane) {
             final StackPane stackPane = (StackPane) o;
             return stackPane;
         }
         throw new IllegalArgumentException();
     }
 
-    public static void clearMainScene(){
+    public static void clearMainScene() {
 
         stackPaneHashMap.put(stackPane1, Symbol.EMPTY.number);
         stackPaneHashMap.put(stackPane2, Symbol.EMPTY.number);
@@ -151,15 +150,15 @@ public class Controller implements EnterSymbol{
         stackPaneHashMap.put(stackPane8, Symbol.EMPTY.number);
         stackPaneHashMap.put(stackPane9, Symbol.EMPTY.number);
 
-        for(Map.Entry<StackPane, Integer> entry: stackPaneHashMap.entrySet()){
-            entry.getKey().getChildren().remove(1,entry.getKey().getChildren().size());
+        for (Map.Entry<StackPane, Integer> entry : stackPaneHashMap.entrySet()) {
+            entry.getKey().getChildren().remove(1, entry.getKey().getChildren().size());
         }
     }
 
-    public static boolean checkFinalWin(){
+    public static boolean checkFinalWin() {
 
 
-        if(gameStatus.isThereFinalWin()) {
+        if (gameStatus.isThereFinalWin()) {
 
             Text message1 = new Text();
             Text message2 = new Text();
@@ -182,14 +181,15 @@ public class Controller implements EnterSymbol{
                 exit();
             });
 
+
             if (gameStatus.getPlayerScore() == 5) {
                 message1.setText("Congratulation!");
                 message2.setText("You won the game.");
-            }
-            else{
+            } else {
                 message1.setText("Sorry!");
                 message2.setText("You lost the game.");
             }
+
 
             Scene sc = new Scene(g, 750, 400, Color.BLACK);
             Stage stageWin = new Stage();
@@ -218,17 +218,16 @@ public class Controller implements EnterSymbol{
 
             if (stackPaneHashMap.get(convertion(e.getSource())) == Symbol.EMPTY.number) {
 
-                if(symbolsGroup.getSelectedToggle().equals(crossRadio)){
+                if (symbolsGroup.getSelectedToggle().equals(crossRadio)) {
                     EnterSymbol.putCross(convertion(e.getSource()));
-                }
-                else{
+                } else {
                     EnterSymbol.putCircle(convertion(e.getSource()));
                 }
             }
 
-            boolean check= checkRoundWin();
+            boolean check = checkRoundWin();
 
-            if(!(check)) {
+            if (!(check)) {
                 EnterSymbol.drawComputerSymbol(symbolsGroup.getSelectedToggle());
                 checkRoundWin();
             }

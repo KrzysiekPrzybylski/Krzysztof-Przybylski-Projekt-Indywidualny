@@ -18,7 +18,6 @@ public class GameStatus implements Serializable {
     private int playerScore;
     private int computerScore;
 
-
     public int getRoundNumber() {
         return roundNumber;
     }
@@ -43,26 +42,26 @@ public class GameStatus implements Serializable {
         this.computerScore = computerScore;
     }
 
-    public boolean isThereFinalWin(){
-        return getPlayerScore()==5 || getComputerScore()==5;
+    public boolean isThereFinalWin() {
+        return getPlayerScore() == 5 || getComputerScore() == 5;
     }
 
-    public void increseRoundNumber(){
-        roundNumber = roundNumber+1;
+    public void increaseRoundNumber() {
+        roundNumber = roundNumber + 1;
     }
 
-    public void pointForPlayer(){
-        playerScore = playerScore+1;
+    public void pointForPlayer() {
+        playerScore = playerScore + 1;
     }
 
-    public void pointForComputer(){
-        computerScore = computerScore+1;
+    public void pointForComputer() {
+        computerScore = computerScore + 1;
     }
 
-    public void clearGameStatus(){
-        roundNumber=1;
-        playerScore=0;
-        computerScore=0;
+    public void clearGameStatus() {
+        roundNumber = 1;
+        playerScore = 0;
+        computerScore = 0;
     }
 
     @Override

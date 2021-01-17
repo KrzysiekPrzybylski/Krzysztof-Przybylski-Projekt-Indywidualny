@@ -10,7 +10,7 @@ import static com.kodilla.MainScene.buildMainScene;
 import static com.kodilla.StartMenu.*;
 
 
-public class TicTacToe extends Application{
+public class TicTacToe extends Application {
 
     public static GameStatus gameStatus = new GameStatus();
     public static Stage primaryStageClone;
@@ -18,7 +18,7 @@ public class TicTacToe extends Application{
     public static Scene startScene = new Scene(getStartGrid(), 700, 400, Color.WHITE);
 
 
-    public static void main (String[] args){
+    public static void main(String[] args) {
         launch(args);
     }
 
@@ -34,13 +34,12 @@ public class TicTacToe extends Application{
         primaryStage.setScene(startScene);
         primaryStage.show();
 
-        startButton.setOnAction((e) ->{
+        startButton.setOnMouseClicked((e) -> {
             primaryStage.setScene(buildMainScene());
             whoFirst();
         });
         primaryStageClone = primaryStage;
     }
-
 
 
 }

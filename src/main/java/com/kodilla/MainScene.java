@@ -10,7 +10,7 @@ import static com.kodilla.SummaryGrid.getSummaryGrid;
 
 public class MainScene {
 
-    public static Scene buildMainScene(){
+    public static Scene buildMainScene() {
 
         GridPane mainGrid = new GridPane();
         mainGrid.setAlignment(Pos.CENTER);

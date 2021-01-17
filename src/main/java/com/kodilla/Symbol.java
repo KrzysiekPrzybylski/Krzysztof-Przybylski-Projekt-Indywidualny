@@ -7,8 +7,8 @@ public enum Symbol {
 
     Integer number;
 
-    Symbol(Integer n){
-        number=n;
+    Symbol(Integer n) {
+        number = n;
     }
 }
 

@@ -11,17 +11,17 @@ public class SaveFileService implements Serializable {
 
 
     public static void save(int roundNumber, int playerPoints, int computerPoints) {
-        map.put("round number",roundNumber);
-        map.put("player points",playerPoints);
-        map.put("computer points",computerPoints);
+        map.put("round number", roundNumber);
+        map.put("player points", playerPoints);
+        map.put("computer points", computerPoints);
         GameStatus gameStatus = new GameStatus(roundNumber, playerPoints, computerPoints);
 
         try {
-            ObjectOutputStream oos = new ObjectOutputStream (new FileOutputStream(file));
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
             oos.writeObject(gameStatus);
             oos.close();
         } catch (Exception e) {
-            // obsługa błędów
+            e.printStackTrace();
         }
     }
 
@@ -29,7 +29,7 @@ public class SaveFileService implements Serializable {
         GameStatus gameStatus = null;
         try {
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
-            gameStatus = (GameStatus)ois.readObject();
+            gameStatus = (GameStatus) ois.readObject();
             System.out.println(gameStatus);
             ois.close();
         } catch (Exception e) {

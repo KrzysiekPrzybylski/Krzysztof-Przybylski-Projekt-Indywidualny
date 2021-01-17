@@ -27,7 +27,7 @@ public class StartMenu {
     static Button startButton = new Button("START");
 
 
-    public static GridPane getStartGrid(){
+    public static GridPane getStartGrid() {
 
         DropShadow ds = new DropShadow();
         ds.setOffsetY(2.0f);
